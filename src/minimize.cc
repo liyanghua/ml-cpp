@@ -60,7 +60,7 @@ static double CubicInterpolation(double f0, double df0,
 
 namespace
 {
-  struct QuadraticInterpolationHelper
+  const struct QuadraticInterpolationHelper
   {
     double f0, df0, a0, fa0;
     double expect_ret;
@@ -72,7 +72,7 @@ namespace
     {2.0, 2.0, 1.0, 5.0, -1.0},
   };
 
-  struct CubicInterpolationHelper
+  const struct CubicInterpolationHelper
   {
     double f0, df0, a0, fa0, a1, fa1;
     double expect_ret;
@@ -141,7 +141,6 @@ static bool LineSearch(const MultiFunction * fun,
   double PHI_ALPHAi_1;
   double PHI_ALPHAi;
   double dPHI0;
-  double dPHI_ALPHAi_1;
   double dPHI_ALPHAi;
 
   double ALPHAj;
@@ -160,7 +159,7 @@ retry:
 
   x.CopyFrom(xk);
   PHI0 = PHI_ALPHAi_1 = fun->Eval(x); fun->Gradient(x, &gradient);
-  dPHI0 = dPHI_ALPHAi_1 = gradient.Dot(pk);
+  dPHI0 = gradient.Dot(pk);
 
   // step 1
   for (i=1; ; i++)
@@ -202,7 +201,6 @@ retry:
     assert(ALPHAi_1 < ALPHAi);// {ALPHA(i)} is monitonically increasing
     ALPHAi_1 = ALPHAi;
     PHI_ALPHAi_1 = PHI_ALPHAi;
-    dPHI_ALPHAi_1 = dPHI_ALPHAi;
 
     ALPHAi = (ALPHAi_1 + ALPHA_MAX) / 2.0;// bisection
   }

@@ -16,16 +16,20 @@ void Vector::CopyFrom(const Vector& ve)
 {
   if (l != ve.l)
   {
-    delete v;
+    delete [] v;
     v = 0;
     l = 0;
-  }
 
-  if (ve.l)
+    if (ve.l)
+    {
+      v = new double[ve.l];
+      l = ve.l;
+      memcpy(v, ve.v, sizeof(double) * l);
+    }
+  }
+  else if (ve.l)
   {
-    v = new double[ve.l];
-    l = ve.l;
-    memcpy(v, ve.v, sizeof(double) * l);
+    memcpy(v, ve.v, sizeof(double) * ve.l);
   }
 }
 
@@ -40,7 +44,7 @@ void Vector::Init(int _l)
   if (l == _l)
     return;
 
-  delete v;
+  delete [] v;
   v = 0;
   l = 0;
 

@@ -17,7 +17,7 @@ namespace
   static const double kDeltaLow = 1e-6;
   static const double kDeltaHigh = 1e-9;
 
-  void ExpectDoubleEQHelper(double d1, double d2, double delta, char * func, int line)
+  void ExpectDoubleEQHelper(double d1, double d2, double delta, const char * func, int line)
   {
 
     if (fabs(d1-d2) > delta)

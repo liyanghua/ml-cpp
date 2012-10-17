@@ -24,7 +24,7 @@ struct Vector
   }
   ~Vector()
   {
-    delete v;
+    delete [] v;
   }
   void CopyFrom(const Vector& ve);
   void Swap(Vector * ve);
@@ -75,7 +75,7 @@ struct Matrix
   }
   ~Matrix()
   {
-    delete v;
+    delete [] v;
   }
 
   // accessors
