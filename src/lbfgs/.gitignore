@@ -1,0 +1,4 @@
+*.o
+*.a
+sample_c
+sample_cpp

@@ -65,15 +65,15 @@ licence.
 #include <config.h>
 #endif/*HAVE_CONFIG_H*/
 
+#include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
 
-#include "lbfgs.h"
+#include <lbfgs.h>
 
 #ifdef  _MSC_VER
-# define inline  __inline
-# define USE_SSE
+#define inline  __inline
 #endif/*_MSC_VER*/
 
 #if     defined(USE_SSE) && defined(__SSE2__) && LBFGS_FLOAT == 64
