@@ -10,7 +10,7 @@ LIBS = -lm
 all: liblbfgs.a sample_c sample_cpp
 
 liblbfgs.a: lbfgs.o
-	$(AR) -rc $@ lbfgs.o
+	$(AR) -rc $@ $?
 	$(RANLIB) $@
 
 sample_c: sample_c.o liblbfgs.a
