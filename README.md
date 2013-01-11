@@ -1,4 +1,4 @@
 ml-cpp
 ======
 
-My Machine Learning Code
+My Collection of Machine Learning Code
