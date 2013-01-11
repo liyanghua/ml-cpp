@@ -19,10 +19,10 @@ sample_c: sample_c.o
 sample_cpp: sample_cpp.o
 	$(CXX) $(LIBS) -o $@ $< liblbfgs.a
 
-sample_c.o: sample.c
+%.o: %.c
 	$(CC) $(CPPFLAGS) $(CFLAGS) -c -o $@ $<
 
-sample_cpp.o: sample.cpp
+%.o: %.cpp
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c -o $@ $<
 
 clean:
