@@ -13,11 +13,11 @@ liblbfgs.a: lbfgs.o
 	$(AR) -rc $@ lbfgs.o
 	$(RANLIB) $@
 
-sample_c: sample_c.o
-	$(CC) $(LIBS) -o $@ $< liblbfgs.a
+sample_c: sample_c.o liblbfgs.a
+	$(CC) $(LIBS) -o $@ $?
 
-sample_cpp: sample_cpp.o
-	$(CXX) $(LIBS) -o $@ $< liblbfgs.a
+sample_cpp: sample_cpp.o liblbfgs.a
+	$(CXX) $(LIBS) -o $@ $?
 
 %.o: %.c
 	$(CC) $(CPPFLAGS) $(CFLAGS) -c -o $@ $<
