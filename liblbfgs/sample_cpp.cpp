@@ -121,7 +121,7 @@ protected:
 
 #define N   100
 
-int main(int argc, char *argv)
+int main(int argc, char **argv)
 {
     objective_function obj;
     return obj.run(N);
