@@ -161,30 +161,6 @@
 	<References>
 	</References>
 	<Files>
-		<Filter
-			Name="lbfgs"
-			>
-			<File
-				RelativePath="..\src\lbfgs\arithmetic_ansi.h"
-				>
-			</File>
-			<File
-				RelativePath="..\src\lbfgs\arithmetic_sse_double.h"
-				>
-			</File>
-			<File
-				RelativePath="..\src\lbfgs\arithmetic_sse_float.h"
-				>
-			</File>
-			<File
-				RelativePath="..\src\lbfgs\lbfgs.c"
-				>
-			</File>
-			<File
-				RelativePath="..\src\lbfgs\lbfgs.h"
-				>
-			</File>
-		</Filter>
 		<File
 			RelativePath="..\src\function.cc"
 			>
