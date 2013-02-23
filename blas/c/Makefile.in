@@ -22,8 +22,8 @@ PLAT = LINUX
 # Libraries and includes
 #-----------------------------------------------------------------------------
  
-BLLIB = ../../BLAS/blas_$(PLAT).a
-CBLIB = ../cblas_$(PLAT).a
+BLLIB = ../../blas_$(PLAT).a
+CBLIB = ../../cblas_$(PLAT).a
 
 #-----------------------------------------------------------------------------
 # Compilers
