@@ -1,8 +1,8 @@
 all:
-	( cd f && make )
-	( cd c && make )
+	( cd f && $(MAKE) )
+	( cd c && $(MAKE) )
 
 clean:
-	( cd f && make clean )
-	( cd c && make clean )
+	( cd f && $(MAKE) clean )
+	( cd c && $(MAKE) clean )
 	rm -f *.a
