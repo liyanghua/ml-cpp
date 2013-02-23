@@ -6,12 +6,15 @@
 
 include make.inc
 
-all: lapack_install lib blas_testing lapack_testing 
+all: lib
 
-lib: lapacklib tmglib
-#lib: blaslib variants lapacklib tmglib
+lib: blaslib variants lapacklib lapackelib tmglib
 
-clean: cleanlib cleantesting cleanblas_testing 
+test: blas_testing variants_testing lapack_testing lapacke_example
+
+clean: cleanall
+
+
 
 lapack_install:
 	( cd INSTALL; $(MAKE); ./testlsame; ./testslamch; ./testdlamch; \
@@ -20,7 +23,7 @@ lapack_install:
 blaslib:
 	( cd BLAS/SRC; $(MAKE) )
 
-lapacklib:	lapack_install
+lapacklib: lapack_install
 	( cd SRC; $(MAKE) )
 
 lapackelib: lapacklib
@@ -31,15 +34,15 @@ lapacke_example: lapackelib
 
 variants:
 	( cd SRC/VARIANTS ; $(MAKE))
-	
+
 tmglib:
 	( cd TESTING/MATGEN; $(MAKE) )
 
-lapack_testing:	lib
+lapack_testing: lib
 	( cd TESTING ; $(MAKE) )
 	./lapack_testing.py
 
-variants_testing: lib variants
+variants_testing: lib
 	( cd TESTING ; rm -f xlintst* ; $(MAKE)  VARLIB='SRC/VARIANTS/LIB/cholrl.a' ; \
 	mv stest.out stest_cholrl.out ; mv dtest.out dtest_cholrl.out ; mv ctest.out ctest_cholrl.out ; mv ztest.out ztest_cholrl.out )
 	( cd TESTING ; rm -f xlintst* ; $(MAKE)  VARLIB='SRC/VARIANTS/LIB/choltop.a' ; \
@@ -52,13 +55,13 @@ variants_testing: lib variants
 	mv stest.out stest_lurec.out ; mv dtest.out dtest_lurec.out ; mv ctest.out ctest_lurec.out ; mv ztest.out ztest_lurec.out )
 	( cd TESTING ;  rm -f xlintst* ; $(MAKE)  VARLIB='SRC/VARIANTS/LIB/qrll.a' ; \
 	mv stest.out stest_qrll.out ; mv dtest.out dtest_qrll.out ; mv ctest.out ctest_qrll.out ; mv ztest.out ztest_qrll.out )
-		
+
 blas_testing:
 	( cd BLAS/TESTING; $(MAKE) -f Makeblat1 )
 	( cd BLAS; ./xblat1s > sblat1.out    ; \
 	           ./xblat1d > dblat1.out    ; \
 	           ./xblat1c > cblat1.out    ; \
-	           ./xblat1z > zblat1.out    ) 
+	           ./xblat1z > zblat1.out    )
 	( cd BLAS/TESTING; $(MAKE) -f Makeblat2 )
 	( cd BLAS; ./xblat2s < sblat2.in     ; \
 	           ./xblat2d < dblat2.in     ; \
@@ -68,11 +71,13 @@ blas_testing:
 	( cd BLAS; ./xblat3s < sblat3.in     ; \
 	           ./xblat3d < dblat3.in     ; \
 	           ./xblat3c < cblat3.in     ; \
-	           ./xblat3z < zblat3.in     ) 
+	           ./xblat3z < zblat3.in     )
+
+
 html:
 	@echo "LAPACK HTML PAGES GENRATION with Doxygen"
 	doxygen DOCS/Doxyfile
-	@echo "=================="	
+	@echo "=================="
 	@echo "LAPACK HTML PAGES GENRATED in DOCS/explore-html"
 	@echo "Usage: open DOCS/explore-html/index.html"
 	@echo "Online version available at http://www.netlib.org/lapack/explore-html/"
@@ -87,6 +92,7 @@ man:
 	@echo "Usage: man dgetrf.f"
 	@echo "=================="
 
+
 cleanlib:
 	( cd INSTALL; $(MAKE) clean )
 	( cd BLAS/SRC; $(MAKE) clean )
@@ -94,9 +100,8 @@ cleanlib:
 	( cd SRC/VARIANTS; $(MAKE) clean )
 	( cd TESTING/MATGEN; $(MAKE) clean )
 	( cd lapacke; $(MAKE) clean )
-	
 
-cleanblas_testing:	
+cleanblas_testing:
 	( cd BLAS/TESTING; $(MAKE) -f Makeblat1 clean )
 	( cd BLAS/TESTING; $(MAKE) -f Makeblat2 clean )
 	( cd BLAS/TESTING; $(MAKE) -f Makeblat3 clean )
@@ -107,6 +112,5 @@ cleantesting:
 	( cd TESTING/EIG; $(MAKE) clean )
 	( cd TESTING; rm -f xlin* xeig* )
 
-cleanall: cleanlib cleanblas_testing cleantesting 
+cleanall: cleanlib cleanblas_testing cleantesting
 	rm -f *.a TESTING/*.out INSTALL/test*  BLAS/*.out
-

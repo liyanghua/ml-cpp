@@ -1,0 +1,15 @@
+BLAS/*.out
+BLAS/xblat*
+INSTALL/testdlamch
+INSTALL/testdsecnd
+INSTALL/testieee
+INSTALL/testlsame
+INSTALL/testsecond
+INSTALL/testslamch
+INSTALL/testversion
+lapacke/example/xexample*
+TESTING/*.out
+TESTING/xeig*
+TESTING/xlin*
+TESTING/LIN/xlin*
+TESTING/testing_results.txt
